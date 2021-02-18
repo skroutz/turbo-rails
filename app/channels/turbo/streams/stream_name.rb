@@ -18,7 +18,7 @@ module Turbo::Streams::StreamName
       if streamables.is_a?(Array)
         streamables.map  { |streamable| stream_name_from(streamable) }.join(":")
       else
-        streamables.then { |streamable| streamable.try(:to_gid_param) || streamable.to_param }
+        streamables.yield_self { |streamable| streamable.try(:to_gid_param) || streamable.to_param }
       end
     end
 end
